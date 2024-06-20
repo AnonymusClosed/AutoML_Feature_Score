@@ -103,10 +103,10 @@ Essa formulação expressa a pontuação final $S$ como a soma das pontuações 
   Essa categoria foca na capacidade dos frameworks de AutoML em fornecer métodos para visualizar a estrutura interna dos modelos gerados. A visualização da estrutura do modelo é essencial para que os usuários compreendam como os dados são processados e como as decisões são tomadas dentro do modelo. Por exemplo, a visualização de uma árvore de decisão permite que os usuários vejam claramente as ramificações e critérios usados em cada nó para realizar uma previsão, facilitando a interpretação do processo de decisão. Este entendimento profundo permite não apenas uma melhor interpretação dos resultados, mas também facilita a identificação de possíveis problemas ou áreas de melhoria. Ao oferecer ferramentas de visualização da estrutura, os frameworks capacitam os usuários a realizar uma análise crítica e detalhada, promovendo a transparência e a confiança nos modelos desenvolvidos.
 
 
-### Aplicação pratica
+### Aplicação prática
 A avaliação completa para cada ferramenta pode ser acessada [aqui](https://docs.google.com/spreadsheets/d/1B3uKCdwRsdOYjzJNuYtJmMN87GJ1njXr5GLsLm7hYws/edit?usp=sharing) :arrow_down:
 
-### Tabela Avaliação de Transparência e Interpretabilidade de Frameworks de AutoML
+### Tabela de Avaliação de Transparência e Interpretabilidade de Frameworks de AutoML
 
 | **Categoria**               | **Ferramenta**  | **Pontuação Total** |
 |-----------------------------|-----------------|---------------------|
@@ -173,7 +173,7 @@ A seguir temos os resultados da execução de todos os testes com as ferramentas
 Os resultados a seguir se referem a Tabela 3 do artigo.
 
 
-| dataset              | ferramenta   | acuracia | precisao | recall | f1    | tempo   |
+| Dataset              | Ferramenta   | Acurácia | Precisão | Recall | F1    | Tempo   |
 |----------------------|--------------|----------|----------|--------|-------|---------|
 | KronoDroid Emulator  | AutoGluon    | 0,9725   | 0,9713   | 0,9669 | 0,9691| 00:08:10|
 |                      | Auto-Sklearn | 0,9711   | 0,9684   | 0,9665 | 0,9675| 00:59:55|
@@ -231,7 +231,7 @@ Os resultados a seguir se referem a Tabela 3 do artigo.
 
  Os resultados a seguir são das ferramentas que tinham a opção de desativação do ensemble em suas configurações.
 
-| dataset              | ferramenta   | acuracia | precisao | recall | f1    | tempo   |
+| Dataset              | Ferramenta   | Acurácia | Precisão | Recall | F1    | Tempo   |
 |----------------------|--------------|----------|----------|--------|-------|---------|
 | KronoDroid Emulator  | AutoGluon    | 0,9699   | 0,9673   | 0,965  | 0,9662| 00:05:06|
 |                      | Auto-Sklearn | 0,9678   | 0,9647   | 0,9629 | 0,9638| 00:59:58|
@@ -272,7 +272,7 @@ Os resultados a seguir se referem a Tabela 3 do artigo.
 
 ### Diferença das métricas com e sem ensemble (C. ensemble - S. ensemble)
 
-| dataset                | ferramenta   | acuracia | precisao | recall | f1  | tempo   |
+| Dataset                | Ferramenta   | Acurácia | Precisão | Recall | F1  | Tempo   |
 |------------------------|--------------|----------|----------|--------|-----|---------|
 | KronoDroid Emulator    | AutoGluon    | 0,26%    | 0,40%    | 0,19%  | 0,29% | 00:03:04 |
 |                        | Auto-Sklearn | 0,33%    | 0,37%    | 0,36%  | 0,37% | -00:00:03 |
@@ -313,7 +313,7 @@ Os resultados a seguir se referem a Tabela 3 do artigo.
 
 ### Resultados da execução do AutoGluon com e sem otimização
 
-| dataset                    | Acuracia | Precisao | Recall | F1 | Tempo | Acuracia | Precisao | Recall | F1 | Tempo |
+| Dataset                    | Acurácia | Precisão | Recall | F1 | Tempo | Acurácia | Precisão | Recall | F1 | Tempo |
 |----------------------------|----------------|----------------|--------------|----------|--------------|----------------|----------------|--------------|----------|--------------|
 | **Com Otimização**         |                |                |              |          |              | **Sem Otimização** |                |              |          |              |
 | ADROIT                     | 0,9179         | 0,9176         | 0,9179       | 0,9162   | 00:04:04     | 0,9136         | 0,8964         | 0,7992       | 0,845    | 00:01:05     |
@@ -327,8 +327,7 @@ Os resultados a seguir se referem a Tabela 3 do artigo.
 
 
 
-**Referências:**
-## Fontes:
+## **Referências:**
 
 1. Arrieta, A. B., Díaz-Rodríguez, N., Del Ser, J., Bennetot, A., Tabik, S., Barbado, A., ... & Benjamins, R. (2020). Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI. *Information fusion*, 58, 82-115. [Link](https://doi.org/10.1016/j.inffus.2019.12.012)
 
