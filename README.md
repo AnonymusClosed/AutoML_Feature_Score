@@ -1,3 +1,5 @@
+# AutoML no Contexto de Malware Android: da Automatização e Desempenho à Transparência e XAI
+
 ## AutoML Feature Score
 
 
@@ -5,7 +7,7 @@ AutoML Feature Score combina conceitos de transparência e interpretabilidade pr
 
 
 
-## Pontuação das perguntas
+### Pontuação das perguntas
 Seja:
 -   $S$ a pontuação atribuída ao framework para uma determinada categoria.
 -   $N$ o número de formas (ex,. métodos, algoritmos) nas quais o framework satisfaz a pergunta da categoria.
@@ -41,7 +43,7 @@ Porém, em situações em que a pergunta pode levar a um número indefinido de p
 
 Essa abordagem permite uma avaliação flexível, levando em consideração o contexto específico de cada pergunta e a possibilidade de múltiplas respostas, garantindo uma atribuição adequada de pontos com base nas características do framework em questão.
 
-## Avaliação das categorias
+### Avaliação das categorias
 A forma de pontuação proposta garante que a pontuação final de um framework para um determinado nível esteja normalizada em uma escala que varia de 0 a 100%. Isso é alcançado calculando-se a pontuação real obtida pelo framework para todas as perguntas do nível e dividindo essa soma pelo produto do número total de perguntas e da pontuação máxima atribuída por pergunta. Essa relação garante que a pontuação final possa variar de 0% a 100%, independentemente do número de perguntas em cada nível ou da escala de pontuação máxima. Assim, essa abordagem proporciona uma maneira justa e consistente de avaliar o desempenho dos frameworks, permitindo uma comparação direta entre eles, onde uma pontuação mais alta indica um maior cumprimento dos critérios de transparência e interpretabilidade.
 
 
@@ -101,7 +103,7 @@ Essa formulação expressa a pontuação final $S$ como a soma das pontuações 
   Essa categoria foca na capacidade dos frameworks de AutoML em fornecer métodos para visualizar a estrutura interna dos modelos gerados. A visualização da estrutura do modelo é essencial para que os usuários compreendam como os dados são processados e como as decisões são tomadas dentro do modelo. Por exemplo, a visualização de uma árvore de decisão permite que os usuários vejam claramente as ramificações e critérios usados em cada nó para realizar uma previsão, facilitando a interpretação do processo de decisão. Este entendimento profundo permite não apenas uma melhor interpretação dos resultados, mas também facilita a identificação de possíveis problemas ou áreas de melhoria. Ao oferecer ferramentas de visualização da estrutura, os frameworks capacitam os usuários a realizar uma análise crítica e detalhada, promovendo a transparência e a confiança nos modelos desenvolvidos.
 
 
-## Aplicação pratica
+### Aplicação pratica
 A avaliação completa para cada ferramenta pode ser acessada [aqui](https://docs.google.com/spreadsheets/d/1B3uKCdwRsdOYjzJNuYtJmMN87GJ1njXr5GLsLm7hYws/edit?usp=sharing) :arrow_down:
 
 ### Tabela Avaliação de Transparência e Interpretabilidade de Frameworks de AutoML
@@ -161,6 +163,171 @@ Finalmente, na Análise Interna, TPOT, HyperGBM e MLJar se destacaram com 100 po
 Esta análise destaca que, apesar de algumas ferramentas apresentarem excelente desempenho em métricas como acurácia, recall, F1 score e precisão, é igualmente crucial considerar questões de interpretabilidade e transparência. Estes aspectos não só aumentam a confiança nos resultados, mas também tornam o entendimento das decisões mais sólido. É fundamental que as ferramentas de AutoML sejam transparentes e interpretáveis, além de apresentarem bom desempenho, especialmente no contexto da detecção de malwares em dispositivos Android.
 
 Em resumo, as ferramentas de AutoML, de maneira geral, demonstram boa transparência em relação ao seu pipeline. No entanto, há uma lacuna significativa em termos de transparência e interpretabilidade dos resultados e dos artefatos gerados. Embora algumas ferramentas se destaquem pela clareza funcional, a habilidade de fornecer modelos compreensíveis e de visualizar a estrutura interna ainda requer melhorias substanciais. Estas melhorias são essenciais para aumentar a confiança nos resultados e facilitar a compreensão das decisões tomadas pelos modelos, especialmente em aplicações críticas como a detecção de malwares em dispositivos Android. Para abordar estas questões, as ferramentas poderiam adotar uma opção de interpretabilidade de modelos onde apenas modelos de aprendizado de máquina com interpretabilidade intrínseca, como KNN (K-Nearest Neighbors) e Árvores de Decisão fossem utilizados, tambem utilizar técnicas de interpretabilidade independentes de modelo, como SHAP (Shapley Additive Explanations) e LIME (Local Interpretable Model-agnostic Explanations), juntamente com logs de sistemas claros e objetivos. Essas abordagens ajudariam a tornar os modelos mais transparentes e as decisões mais compreensíveis para os usuários finais.
+
+## Resultados dos testes com as ferramentas
+
+A seguir temos os resultados da execução de todos os testes com as ferramentas de automl.
+
+### Execução das ferramenta com ensemble (configuração padrão)
+
+| dataset              | ferramenta   | acuracia | precisao | recall | f1    | tempo   |
+|----------------------|--------------|----------|----------|--------|-------|---------|
+| kronodroid_emulador  | AutoGluon    | 0,9725   | 0,9713   | 0,9669 | 0,9691| 00:08:10|
+|                      | MH-AutoML    | 0,962    | 0,966    | 0,9479 | 0,9569| 01:21:23|
+|                      | Auto-Sklearn | 0,9711   | 0,9684   | 0,9665 | 0,9675| 00:59:55|
+|                      | TPOT         | 0,9599   | 0,9531   | 0,9571 | 0,9551| 00:53:12|
+|                      | AutoPyTorch  | 0,9754   | 0,9692   | 0,9671 | 0,9677| 00:59:56|
+|                      | LightAutoML  | 0,9722   | 0,9707   | 0,9667 | 0,9687| 00:14:16|
+|                      | HyperGBM     | 0,9688   | 0,9688   | 0,9688 | 0,9688| 00:05:33|
+|                      | MLJar        | 0,9731   | 0,9691   | 0,9671 | 0,9677| 00:59:59|
+| kronodroid_real      | AutoGluon    | 0,9744   | 0,9787   | 0,9757 | 0,993 | 00:06:54|
+|                      | MH-AutoML    | 0,9669   | 0,974    | 0,9631 | 0,9685| 01:51:57|
+|                      | Auto-Sklearn | 0,9717   | 0,9748   | 0,9716 | 0,9732| 00:59:55|
+|                      | TPOT         | 0,9689   | 0,9721   | 0,969  | 0,9705| 00:33:26|
+|                      | AutoPyTorch  | 0,973    | 0,976    | 0,972  | 0,9713| 00:59:59|
+|                      | LightAutoML  | 0,9753   | 0,9791   | 0,9741 | 0,9766| 00:14:10|
+|                      | HyperGBM     | 0,9677   | 0,9677   | 0,9677 | 0,9677| 00:06:50|
+|                      | MLJar        | 0,9719   | 0,975    | 0,9717 | 0,9735| 00:59:57|
+| androcrawl           | AutoGluon    | 0,9866   | 0,9429   | 0,9286 | 0,9357| 00:04:13|
+|                      | MH-AutoML    | 0,9856   | 0,9598   | 0,901  | 0,9295| 01:44:14|
+|                      | Auto-Sklearn | 0,9875   | 0,9471   | 0,9327 | 0,9399| 00:59:58|
+|                      | TPOT         | 0,9869   | 0,9493   | 0,9246 | 0,9368| 01:02:42|
+|                      | AutoPyTorch  | 0,973    | 0,976    | 0,972  | 0,9713| 00:59:59|
+|                      | LightAutoML  | 0,9753   | 0,9791   | 0,9741 | 0,9766| 00:14:10|
+|                      | HyperGBM     | 0,9677   | 0,9677   | 0,9677 | 0,9677| 00:06:50|
+|                      | MLJar        | 0,9719   | 0,975    | 0,9717 | 0,9735| 00:59:57|
+| android_permissions  | AutoGluon    | 0,6726   | 0,6836   | 0,9426 | 0,7925| 00:01:28|
+|                      | MH-AutoML    | 0,6704   | 0,6754   | 0,9683 | 0,7958| 00:14:59|
+|                      | Auto-Sklearn | 0,6738   | 0,6788   | 0,9646 | 0,7968| 00:59:56|
+|                      | TPOT         | 0,6733   | 0,6867   | 0,9333 | 0,7912| 00:40:01|
+|                      | AutoPyTorch  | 0,6838   | 0,6799   | 0,9673 | 0,8003| 01:07:23|
+|                      | LightAutoML  | 0,6749   | 0,6857   | 0,9415 | 0,7935| 00:07:07|
+|                      | HyperGBM     | 0,6728   | 0,6497   | 0,6728 | 0,58  | 00:01:09|
+|                      | MLJar        | 0,674    | 0,679    | 0,9649 | 0,7971| 00:59:57|
+| defensedroid_prs     | AutoGluon    | 0,9301   | 0,9444   | 0,9173 | 0,9307| 00:04:47|
+|                      | MH-AutoML    | 0,9111   | 0,9436   | 0,8787 | 0,91  | 01:00:07|
+|                      | Auto-Sklearn | 0,9215   | 0,9349   | 0,9099 | 0,9222| 01:00:04|
+|                      | TPOT         | 0,9228   | 0,9454   | 0,901  | 0,9227| 00:55:27|
+|                      | AutoPyTorch  | 0,9226   | 0,9363   | 0,91   | 0,9231| 01:03:04|
+|                      | LightAutoML  | 0,9289   | 0,956    | 0,9025 | 0,9285| 00:11:23|
+|                      | HyperGBM     | 0,9238   | 0,9374   | 0,9119 | 0,9245| 00:02:55|
+|                      | MLJar        | 0,922    | 0,9351   | 0,9099 | 0,9229| 01:00:05|
+| drebin               | AutoGluon    | 0,9862   | 0,9846   | 0,9782 | 0,9814| 00:01:13|
+|                      | MH-AutoML    | 0,9798   | 0,9865   | 0,9586 | 0,9723| 00:09:55|
+|                      | Auto-Sklearn | 0,985    | 0,9872   | 0,9722 | 0,9797| 01:00:06|
+|                      | TPOT         | 0,9817   | 0,9864   | 0,9841 | 0,9793| 00:44:24|
+|                      | AutoPyTorch  | 0,9852   | 0,9876   | 0,9727 | 0,9801| 01:00:10|
+|                      | LightAutoML  | 0,9867   | 0,9863   | 0,9777 | 0,982 | 00:11:14|
+|                      | HyperGBM     | 0,9825   | 0,9825   | 0,9825 | 0,9824| 00:01:35|
+|                      | MLJar        | 0,9852   | 0,9874   | 0,9723 | 0,9798| 01:00:07|
+| adroit               | AutoGluon    | 0,9136   | 0,8964   | 0,7992 | 0,845 | 00:01:05|
+|                      | MH-AutoML    | 0,9134   | 0,9397   | 0,7544 | 0,8369| 00:05:35|
+|                      | Auto-Sklearn | 0,9197   | 0,9151   | 0,8019 | 0,8548| 01:00:05|
+|                      | TPOT         | 0,9213   | 0,9242   | 0,7983 | 0,8567| 00:33:16|
+|                      | AutoPyTorch  | 0,9199   | 0,917    | 0,8033 | 0,855 | 01:00:09|
+|                      | LightAutoML  | 0,9176   | 0,9277   | 0,7814 | 0,8482| 00:03:04|
+|                      | HyperGBM     | 0,9126   | 0,9139   | 0,9126 | 0,9098| 00:01:11|
+|                      | MLJar        | 0,9199   | 0,9153   | 0,802  | 0,8549| 01:00:07|
+
+
+
+### Execução das ferramentas sem ensemble
+
+| dataset              | ferramenta   | acuracia | precisao | recall | f1    | tempo   |
+|----------------------|--------------|----------|----------|--------|-------|---------|
+| kronodroid_emulador  | AutoGluon    | 0,9699   | 0,9673   | 0,965  | 0,9662| 00:05:06|
+|                      | Auto-Sklearn | 0,9678   | 0,9647   | 0,9629 | 0,9638| 00:59:58|
+|                      | TPOT         | 0,9525   | 0,9542   | 0,9384 | 0,9462| 00:20:58|
+|                      | AutoPyTorch  | 0,9709   | 0,9671   | 0,9652 | 0,9668| 00:59:04|
+|                      | MLJar        | 0,9701   | 0,9684   | 0,9665 | 0,9674| 00:59:53|
+| kronodroid_real      | AutoGluon    | 0,9755   | 0,9801   | 0,9733 | 0,9767| 00:06:52|
+|                      | Auto-Sklearn | 0,9752   | 0,9776   | 0,9754 | 0,9765| 00:59:58|
+|                      | TPOT         | 0,9646   | 0,9668   | 0,9661 | 0,9665| 00:17:20|
+|                      | AutoPyTorch  | 0,97     | 0,9711   | 0,971  | 0,9701| 00:58:22|
+|                      | MLJar        | 0,9715   | 0,9745   | 0,9711 | 0,9733| 00:59:53|
+| androcrawl           | AutoGluon    | 0,9863   | 0,9375   | 0,9307 | 0,9341| 00:05:15|
+|                      | Auto-Sklearn | 0,9859   | 0,9546   | 0,908  | 0,9307| 01:00:01|
+|                      | TPOT         | 0,9858   | 0,9584   | 0,9037 | 0,9302| 00:17:49|
+|                      | AutoPyTorch  | 0,9871   | 0,9469   | 0,9322 | 0,939 | 00:59:46|
+|                      | MLJar        | 0,9872   | 0,9471   | 0,9325 | 0,9395| 00:59:55|
+| android_permissions  | AutoGluon    | 0,6712   | 0,6868   | 0,9277 | 0,7893| 00:00:52|
+|                      | Auto-Sklearn | 0,6723   | 0,676    | 0,9723 | 0,7975| 00:59:57|
+|                      | TPOT         | 0,678    | 0,6911   | 0,931  | 0,7933| 00:15:47|
+|                      | AutoPyTorch  | 0,6733   | 0,6721   | 0,962  | 0,7949| 00:58:52|
+|                      | MLJar        | 0,673    | 0,6786   | 0,9641 | 0,7963| 00:59:50|
+| defensedroid_prs     | AutoGluon    | 0,924    | 0,9385   | 0,9127 | 0,9254| 00:02:20|
+|                      | Auto-Sklearn | 0,92     | 0,95     | 0,8922 | 0,9203| 00:59:58|
+|                      | TPOT         | 0,9198   | 0,949    | 0,8928 | 0,92  | 00:16:08|
+|                      | AutoPyTorch  | 0,9127   | 0,9356   | 0,908  | 0,9231| 00:59:48|
+|                      | MLJar        | 0,9212   | 0,9344   | 0,9093 | 0,9218| 01:00:00|
+| drebin               | AutoGluon    | 0,986    | 0,9832   | 0,9791 | 0,9812| 00:01:06|
+|                      | Auto-Sklearn | 0,9836   | 0,9819   | 0,9737 | 0,9778| 00:59:59|
+|                      | TPOT         | 0,9867   | 0,985    | 0,9791 | 0,982 | 00:15:28|
+|                      | AutoPyTorch  | 0,9821   | 0,9862   | 0,9711 | 0,9787| 01:00:01|
+|                      | MLJar        | 0,9849   | 0,9871   | 0,972  | 0,9795| 01:00:03|
+| adroit               | AutoGluon    | 0,9178   | 0,9174   | 0,7913 | 0,8497| 00:00:31|
+|                      | Auto-Sklearn | 0,9158   | 0,9177   | 0,7834 | 0,8453| 00:59:57|
+|                      | TPOT         | 0,9161   | 0,9169   | 0,7854 | 0,846 | 00:15:44|
+|                      | AutoPyTorch  | 0,9195   | 0,915    | 0,8016 | 0,846 | 00:00:57|
+|                      | MLJar        | 0,9196   | 0,915    | 0,802  | 0,8547| 01:00:01|
+
+
+### Diferença das métricas com e sem ensemble (C. ensemble - S. ensemble)
+
+| dataset                | ferramenta   | acuracia | precisao | recall | f1  | tempo   |
+|------------------------|--------------|----------|----------|--------|-----|---------|
+| kronodroid_emulador    | AutoGluon    | 0,26%    | 0,40%    | 0,19%  | 0,29% | 00:03:04 |
+|                        | Auto-Sklearn | 0,33%    | 0,37%    | 0,36%  | 0,37% | 23:59:57 |
+|                        | TPOT         | 0,74%    | -0,11%   | 1,87%  | 0,89% | 00:32:14 |
+|                        | AutoPyTorch  | 0,45%    | 0,21%    | 0,19%  | 0,09% | 00:00:52 |
+|                        | MLJar        | 0,30%    | 0,07%    | 0,06%  | 0,03% | 00:00:06 |
+| kronodroid_real        | AutoGluon    | -0,11%   | -0,14%   | 0,24%  | 1,63% | 00:00:02 |
+|                        | Auto-Sklearn | -0,35%   | -0,28%   | -0,38% | -0,33% | 23:59:57 |
+|                        | TPOT         | 0,43%    | 0,53%    | 0,29%  | 0,40% | 00:16:06 |
+|                        | AutoPyTorch  | 0,30%    | 0,49%    | 0,10%  | 0,12% | 00:01:37 |
+|                        | MLJar        | 0,04%    | 0,05%    | 0,06%  | 0,02% | 00:00:04 |
+| androcrawl             | AutoGluon    | 0,03%    | 0,54%    | -0,21% | 0,16% | 23:58:58 |
+|                        | Auto-Sklearn | 0,16%    | -0,75%   | 2,47%  | 0,92% | 23:59:57 |
+|                        | TPOT         | 0,11%    | -0,91%   | 2,09%  | 0,66% | 00:44:53 |
+|                        | AutoPyTorch  | -1,41%   | 2,91%    | 3,98%  | 3,23% | 00:00:13 |
+|                        | MLJar        | -1,53%   | 2,79%    | 3,92%  | 3,40% | 00:00:02 |
+| android_permissions    | AutoGluon    | 0,14%    | -0,32%   | 1,49%  | 0,32% | 00:00:36 |
+|                        | Auto-Sklearn | 0,15%    | 0,28%    | -0,77% | -0,07% | 23:59:59 |
+|                        | TPOT         | -0,47%   | -0,44%   | 0,23%  | -0,21% | 00:24:14 |
+|                        | AutoPyTorch  | 1,05%    | 0,78%    | 0,53%  | 0,54% | 00:08:31 |
+|                        | MLJar        | 0,10%    | 0,04%    | 0,08%  | 0,08% | 00:00:07 |
+| defensedroid_prs       | AutoGluon    | 0,61%    | 0,59%    | 0,46%  | 0,53% | 00:02:27 |
+|                        | Auto-Sklearn | 0,15%    | -1,52%   | 1,77%  | 0,19% | 00:00:06 |
+|                        | TPOT         | 0,30%    | -0,36%   | 0,82%  | 0,27% | 00:39:19 |
+|                        | AutoPyTorch  | 0,99%    | 0,07%    | 0,20%  | 0,00% | 00:03:16 |
+|                        | MLJar        | 0,08%    | 0,07%    | 0,06%  | 0,11% | 00:00:05 |
+| drebin                 | AutoGluon    | 0,02%    | 0,14%    | -0,09% | 0,02% | 00:00:07 |
+|                        | Auto-Sklearn | 0,14%    | 0,53%    | -0,15% | 0,19% | 00:00:07 |
+|                        | TPOT         | -0,50%   | 0,14%    | 0,50%  | -0,27% | 00:28:56 |
+|                        | AutoPyTorch  | 0,31%    | 0,14%    | 0,16%  | 0,14% | 00:00:09 |
+|                        | MLJar        | 0,03%    | 0,03%    | 0,03%  | 0,03% | 00:00:04 |
+| adroit                 | AutoGluon    | -0,42%   | -2,10%   | 0,79%  | -0,47% | 00:00:34 |
+|                        | Auto-Sklearn | 0,39%    | -0,26%   | 1,85%  | 0,95% | 00:00:08 |
+|                        | TPOT         | 0,52%    | 0,73%    | 1,29%  | 1,07% | 00:17:32 |
+|                        | AutoPyTorch  | 0,04%    | 0,20%    | 0,17%  | 0,90% | 00:59:12 |
+|                        | MLJar        | 0,03%    | 0,03%    | 0,00%  | 0,02% | 00:00:06 |
+
+
+### Resultados da execução do AutoGluon com e sem otimização
+
+| dataset                    | Acuracia | Precisao | Recall | F1 | Tempo | Acuracia | Precisao | Recall | F1 | Tempo |
+|----------------------------|----------------|----------------|--------------|----------|--------------|----------------|----------------|--------------|----------|--------------|
+| **Com Otimização**         |                |                |              |          |              | **Sem Otimização** |                |              |          |              |
+| adroit                     | 0,9179         | 0,9176         | 0,9179       | 0,9162   | 00:04:04     | 0,9136         | 0,8964         | 0,7992       | 0,845    | 00:01:05     |
+| drebin215                  | 0,9853         | 0,9853         | 0,9853       | 0,9853   | 00:13:23     | 0,9862         | 0,9846         | 0,9782       | 0,9814   | 00:01:13     |
+| kronodroid_real_device     | 0,9761         | 0,9761         | 0,9761       | 0,9761   | 01:12:52     | 0,9744         | 0,9787         | 0,9757       | 0,993    | 00:06:54     |
+| androcrawl                 | 0,9876         | 0,9875         | 0,9876       | 0,9875   | 00:03:54     | 0,9866         | 0,9429         | 0,9286       | 0,9357   | 00:04:13     |
+| android_permissions        | 0,6758         | 0,6583         | 0,6758       | 0,5866   | 00:03:49     | 0,6726         | 0,6836         | 0,9426       | 0,7925   | 00:01:28     |
+| kronodroid_emulador        | 0,9716         | 0,9716         | 0,9716       | 0,9716   | 00:44:06     | 0,9725         | 0,9713         | 0,9669       | 0,9691   | 00:08:10     |
+| defensedroid_prs           | 0,9266         | 0,9270         | 0,9266       | 0,9266   | 00:07:46     | 0,9301         | 0,9444         | 0,9173       | 0,9307   | 00:04:47     |
+
+
+
 
 **Referências:**
 ## Fontes:
